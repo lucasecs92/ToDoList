@@ -1,4 +1,4 @@
-import styles from './Todo.module.css'
+import styles from './Todo.module.css';
 
 export function Todo({ todo }) {
     return (
