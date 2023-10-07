@@ -26,7 +26,7 @@ function App() {
       isCompleted: false,
     },
   ])
-
+// ADD as tarefas
   const addTodo = (text, category) => {
     const newTodos = [...todos, 
       {
@@ -38,6 +38,13 @@ function App() {
     ]
 
     setTodos(newTodos) // atualiza o estado dos meus Todos com os newTodos
+  };
+// REMOVE as tarefas
+  const removeTodo = (id) => {
+    const newTodos = [...todos];
+    const filteredTodos = newTodos.filter((todo) => todo.id !== id ? todo : null);
+
+    setTodos(filteredTodos)
   }
 
   return (
@@ -48,6 +55,7 @@ function App() {
           <Todo
             key={todo.id} 
             todo={todo} 
+            removeTodo={removeTodo}
           />
         ))}
       </section>
@@ -57,3 +65,8 @@ function App() {
 }
 
 export default App;
+
+
+// [...todos] são todos os todo's
+
+// a função removeTodo é disparado quando clicado no botão de X de remover tarefas, checando o id q eu enviei na função e exclui dos ToDos e tb atualiza o stage principal.

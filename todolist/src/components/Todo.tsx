@@ -1,6 +1,6 @@
 import styles from './Todo.module.css';
 
-export function Todo({ todo }) {
+export function Todo({ todo, removeTodo, completeTodo } ) {
     return (
         <section className='todo'>
             <section className='content'>
@@ -9,7 +9,7 @@ export function Todo({ todo }) {
             </section>
             <section className="btn">
                 <button className='complete'>Completar</button>
-                <button className='remove'>x</button>
+        <button className='remove' onClick={() => removeTodo(todo.id)}>x</button>
             </section>
           </section>
     )
