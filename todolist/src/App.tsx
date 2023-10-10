@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Todo } from './components/Todo';
 import { TodoForm } from './components/TodoForm';
 import { Search } from './components/Search';
@@ -6,28 +6,32 @@ import { Filter } from './components/Filter';
 
 import './global.css'; 
 
+// const toDoList = [
+//   {
+//     id: 1,
+//     text: "Criar funcionalidade X no sistema",
+//     category: "Trabalho",
+//     isCompleted: false,
+//   },
+//   { 
+//     id: 2,
+//     text: "Ir para a academia",
+//     category: "Pessoal",
+//     isCompleted: false, 
+//   },
+//   {
+//     id: 3,
+//     text: "Estudar React",
+//     category: "Estudos",
+//     isCompleted: false,
+//   },
+// ];
+
+const dataLocalStorage = JSON.parse(localStorage.getItem('TAREFAS'));
+
 function App() {
 
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: "Criar funcionalidade X no sistema",
-      category: "Trabalho",
-      isCompleted: false,
-    },
-    { 
-      id: 2,
-      text: "Ir para a academia",
-      category: "Pessoal",
-      isCompleted: false, 
-    },
-    {
-      id: 3,
-      text: "Estudar React",
-      category: "Estudos",
-      isCompleted: false,
-    },
-  ])
+  const [todos, setTodos] = useState(dataLocalStorage);
 
 // Funcionalidade de pesquisa
   const [search, setSearch] = useState("");
@@ -36,7 +40,7 @@ function App() {
   const [filter, setFilter] = useState("All");
   const [sort, setSort] = useState("Asc");
 
-// ADD as tarefas
+// Add as tarefas
   const addTodo = (text, category) => {
     const newTodos = [...todos, 
       {
@@ -66,22 +70,32 @@ function App() {
     setTodos(newTodos);
   }
 
+// Salvando os dados no localStorage
+  useEffect(() => {
+      localStorage.setItem('TAREFAS', JSON.stringify(todos));
+  }, [todos] );
+
   return (
     <section className="app">
-      <h1>Lista de Tarefas</h1>
+      <h1>Lista de Tarefas</h1>     
       <Search search={search} setSearch={setSearch} />
-      <Filter filter={filter} setFilter={setFilter}/>
+      <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
       <section className='todo-list'>
         {todos
           .filter((todo) => 
             filter === "All"   // se está 'All' 
               ? true  // vai ser true, ñ vai filtrar nada
               : filter === "Completed" // depois é feito outra checagem, verificando se o filtro é uma tarefa completa 
-              ? todo.isCompleted // se for, retorno as tarefas q tem o "isCompleted" como true
+              ? todo.isCompleted // se for, retorno as tarefas completas que é o "isCompleted" como true
               : !todo.isCompleted // se não, retorna para o filtro 'incomplete' com as tarefas q estão incompletas 
           )
           .filter((todo) => 
             todo.text.toLowerCase().includes(search.toLowerCase())
+          ) 
+          .sort((a, b) =>
+            sort === "Asc"
+              ? a.text.localeCompare(b.text)
+              : b.text.localeCompare(a.text)
           ) 
           .map((todo) => 
       ( 
@@ -111,3 +125,5 @@ export default App;
 
 // .filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase())) // esse filter vai passar e filtrar por todos os todos que contenham o texto digitado no input de pesquisa
 // Simplificando, é uma busca em tempo real.. Se o state de busca contiver os caracteres igual de alguma tarefa da lista, ele vai retornar esse todo p mim.
+
+// localStorage.setItem('TAREFAS', JSON.stringify(todos)) // vou pegar os itens do array 'todos' em forma de JSON e vou salvar no 'localStorage' usando uma 'key' chamada 'TAREFAS'.
