@@ -1,3 +1,8 @@
+:root {
+    --white: #fff;
+
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f4f4f4;
@@ -34,7 +39,7 @@ input {
 
 button {
     background-color: #333974;
-    color: #fff;
+    color: var(--white);
     padding: 5px 10px;
     margin-right: 10px;
     border: none;
@@ -55,7 +60,7 @@ button:hover {
 }
 
 .todo {
-    background-color: #fff;
+    background-color: var(--white);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
     margin-bottom: 10px;
@@ -87,7 +92,7 @@ select {
 }
 
 .todo-select {
-    background-color: #fff;   
+    background-color: var(--white);   
 }
 
 .search, 
@@ -103,7 +108,7 @@ select {
 }
 
 .filter-select {
-    background-color: #fff;
+    background-color: var(--white);
     width: 20vw;
 }
 
