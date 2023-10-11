@@ -27,7 +27,13 @@ import './global.css';
 //   },
 // ];
 
-const dataLocalStorage = JSON.parse(localStorage.getItem('TAREFAS'));
+// type Todo = {
+
+// }
+
+// const dataLocalStorage = JSON.parse(localStorage.getItem('TAREFAS'));
+const item = localStorage.getItem('TAREFAS');
+const dataLocalStorage = JSON.parse(item !== null ? item : '{}');
 
 function App() {
 
@@ -41,7 +47,7 @@ function App() {
   const [sort, setSort] = useState("Asc");
 
 // Add as tarefas
-  const addTodo = (text, category) => {
+  const addTodo = (text: string, category: string) => {
     const newTodos = [...todos, 
       {
         id: Math.floor(Math.random() * 10000),
@@ -54,7 +60,7 @@ function App() {
     setTodos(newTodos) // atualiza o estado dos meus Todos com os newTodos
   };
 // REMOVE as tarefas
-  const removeTodo = (id) => {
+  const removeTodo = (id: string) => {
     const newTodos = [...todos];
     const filteredTodos = newTodos.filter((todo) => 
       todo.id !== id ? todo : null
@@ -62,7 +68,7 @@ function App() {
     setTodos(filteredTodos);
   }
 // COMPLETE as tarefas
-  const completeTodo = (id) => {
+  const completeTodo = (id: string) => {
     const newTodos = [...todos];
     newTodos.map((todo) => 
       todo.id === id ? todo.isCompleted = !todo.isCompleted : todo
@@ -127,3 +133,5 @@ export default App;
 // Simplificando, é uma busca em tempo real.. Se o state de busca contiver os caracteres igual de alguma tarefa da lista, ele vai retornar esse todo p mim.
 
 // localStorage.setItem('TAREFAS', JSON.stringify(todos)) // vou pegar os itens do array 'todos' em forma de JSON e vou salvar no 'localStorage' usando uma 'key' chamada 'TAREFAS'.
+
+// const dataLocalStorage = JSON.parse(item !== null ? item : '{}'); // Se localStorage.getItem('TAREFAS') retornar null, '{}' (uma string representando um objeto JSON vazio) será usado como o argumento para JSON.parse().

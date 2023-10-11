@@ -1,9 +1,9 @@
-// import styles from './Todo.module.css';
+import styles from './Todo.module.css';
 
 export function Todo({ todo, removeTodo, completeTodo }) {
     return (
         <section 
-            className='todo' 
+            className={styles.todo} 
             style={{textDecoration: todo.isCompleted ? "line-through" : "" }}
         >
             <section className='content'>
@@ -11,8 +11,8 @@ export function Todo({ todo, removeTodo, completeTodo }) {
                 <p className='category'>({todo.category})</p>
             </section>
             <section className="btn">
-                <button className='complete' onClick={() => completeTodo(todo.id)}>Completar</button>
-                <button className='remove' onClick={() => removeTodo(todo.id)}>x</button>
+                <button className={styles.complete} onClick={() => completeTodo(todo.id)}>Completar</button>
+                <button className={styles.remove} onClick={() => removeTodo(todo.id)}>x</button>
             </section>
         </section>
     )

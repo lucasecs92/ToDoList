@@ -1,6 +1,8 @@
+import styles from './Search.module.css';
+
 export function Search({ search, setSearch }) {
     return (
-        <section className="search">
+        <section className={styles.search}>
             <h2>Pesquisar:</h2>
             <input 
                 type="text"

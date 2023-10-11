@@ -1,0 +1,19 @@
+.filter  {
+    border-bottom: 1px solid #555;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.filterOptions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filterSelect {
+    background-color: var(--white);
+    width: 20vw;
+}
+
+.filterOrder {
+    margin-right: 120px;
+}
