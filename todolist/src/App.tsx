@@ -27,8 +27,18 @@ import './global.css';
 //   },
 // ];
 
-// type Todo = {
+export interface TodoType {
+   id: number;
+   text: string;
+   category: string; 
+   isCompleted: boolean;
+}
 
+// export interface RemoveType {
+//   removeTodo: TodoType;
+// }
+// export interface CompleteType {
+//   completeTodo: TodoType;
 // }
 
 // const dataLocalStorage = JSON.parse(localStorage.getItem('TAREFAS'));
@@ -47,26 +57,31 @@ function App() {
   const [sort, setSort] = useState("Asc");
 
 // Add as tarefas
-  const addTodo = (text: string, category: string) => {
-    const newTodos = [...todos, 
-      {
-        id: Math.floor(Math.random() * 10000),
-        text,
-        category,
-        isCompleted: false,
-      },
-    ]
+  const addTodo = (text:TodoType, category:TodoType) => {
+  const newTodos = [...todos, 
+    {
+      id: Math.floor(Math.random() * 10000),
+      text,
+      category,
+      isCompleted: false,
+    },
+  ]
 
-    setTodos(newTodos) // atualiza o estado dos meus Todos com os newTodos
+  setTodos(newTodos) // atualiza o estado dos meus Todos com os newTodos
   };
 // REMOVE as tarefas
-  const removeTodo = (id: string) => {
-    const newTodos = [...todos];
-    const filteredTodos = newTodos.filter((todo) => 
-      todo.id !== id ? todo : null
-    );
+  // const removeTodo = (id:TodoType) => {
+  //   const newTodos = [...todos];
+  //   const filteredTodos = newTodos.filter((todo) => 
+  //     todo.id !== id ? todo : null
+  //   );
+  //   setTodos(filteredTodos);
+  // }
+  const removeTodo = (id:TodoType['id']) => {
+    const filteredTodos = todos.filter((todo:TodoType) => todo.id !== id);
     setTodos(filteredTodos);
-  }
+  };
+  
 // COMPLETE as tarefas
   const completeTodo = (id: string) => {
     const newTodos = [...todos];
@@ -88,28 +103,27 @@ function App() {
       <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
       <section className='todo-list'>
         {todos
-          .filter((todo) => 
-            filter === "All"   // se está 'All' 
-              ? true  // vai ser true, ñ vai filtrar nada
-              : filter === "Completed" // depois é feito outra checagem, verificando se o filtro é uma tarefa completa 
-              ? todo.isCompleted // se for, retorno as tarefas completas que é o "isCompleted" como true
-              : !todo.isCompleted // se não, retorna para o filtro 'incomplete' com as tarefas q estão incompletas 
+          .filter((todo:TodoType) => 
+            filter === "All" 
+              ? true 
+              : filter === "Completed" 
+              ? todo.isCompleted 
+              : !todo.isCompleted
           )
-          .filter((todo) => 
+          .filter((todo:TodoType) => 
             todo.text.toLowerCase().includes(search.toLowerCase())
           ) 
-          .sort((a, b) =>
+          .sort((a:TodoType, b:TodoType) =>
             sort === "Asc"
               ? a.text.localeCompare(b.text)
               : b.text.localeCompare(a.text)
           ) 
-          .map((todo) => 
-      ( 
+          .map((todo:TodoType) => ( 
             <Todo
               key={todo.id} 
               todo={todo} 
-              removeTodo={removeTodo}
-              completeTodo={completeTodo}
+              onRemoveTodo={removeTodo}
+              onCompleteTodo={completeTodo}
             />
           ))      
         }
@@ -133,5 +147,11 @@ export default App;
 // Simplificando, é uma busca em tempo real.. Se o state de busca contiver os caracteres igual de alguma tarefa da lista, ele vai retornar esse todo p mim.
 
 // localStorage.setItem('TAREFAS', JSON.stringify(todos)) // vou pegar os itens do array 'todos' em forma de JSON e vou salvar no 'localStorage' usando uma 'key' chamada 'TAREFAS'.
+
+// filter === "All"   // se está 'All' 
+// ? true  // vai ser true, ñ vai filtrar nada
+// : filter === "Completed" // depois é feito outra checagem, verificando se o filtro é uma tarefa completa 
+// ? todo.isCompleted // se for, retorno as tarefas completas que é o "isCompleted" como true
+// : !todo.isCompleted // se não, retorna para o filtro 'incomplete' com as tarefas q estão incompletas 
 
 // const dataLocalStorage = JSON.parse(item !== null ? item : '{}'); // Se localStorage.getItem('TAREFAS') retornar null, '{}' (uma string representando um objeto JSON vazio) será usado como o argumento para JSON.parse().
