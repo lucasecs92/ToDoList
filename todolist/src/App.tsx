@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Todo } from './components/Todo';
-import { TodoForm } from './components/TodoForm';
+import { CreateTask } from './components/CreateTask';
 import { Search } from './components/Search';
 import { Filter } from './components/Filter';
 
@@ -34,13 +34,6 @@ export interface TodoType {
    isCompleted: boolean;
 }
 
-// export interface RemoveType {  
-//   removeTodo: TodoType;
-// }
-// export interface CompleteType {
-//   completeTodo: TodoType;
-// }
-
 // const dataLocalStorage = JSON.parse(localStorage.getItem('TAREFAS'));
 const item = localStorage.getItem('TAREFAS');
 const dataLocalStorage = JSON.parse(item !== null ? item : '{}');
@@ -57,7 +50,7 @@ function App() {
   const [sort, setSort] = useState("Asc");
 
 // Add as tarefas
-  const addTodo = (text: TodoType, category: TodoType) => {
+  const addTodo = (text: string, category: string) => {
     const newTodos = [...todos, 
       {
         id: Math.floor(Math.random() * 10000),
@@ -129,7 +122,7 @@ function App() {
           ))      
         }
       </section>
-      <TodoForm addTodo={addTodo} /> 
+      <CreateTask addTodo={addTodo} /> 
     </section>
   )
 }

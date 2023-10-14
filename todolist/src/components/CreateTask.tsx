@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import styles from "./TodoForm.module.css";
-import { TodoType } from "../App";
+import styles from "./CreateTask.module.css";
 
 interface AddProps {
-    (text: TodoType, category: TodoType): void;
+    (text: string, category: string): void;
 }
 
-export function TodoForm({ addTodo }: {addTodo: AddProps}) {
+export function CreateTask({ addTodo }: {addTodo: AddProps}) {
 
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
@@ -19,17 +18,6 @@ export function TodoForm({ addTodo }: {addTodo: AddProps}) {
             setValue(""); 
             setCategory("");
     }
-    
-    // const handleSubmit = (e) => {
-    //     
-    //     if (!value || !category) return;
-    //     // ADICIONAR TODO
-    //     addTodo(value, category);
-    //     // LIMPAR OS CAMPOS DO FORMULÁRIO
-    //     setValue("");   
-    //     setCategory("");
-    //     // console.log(value, category)
-    // }
     
     return (
         <section className={styles.taskForm}>
@@ -48,4 +36,16 @@ export function TodoForm({ addTodo }: {addTodo: AddProps}) {
     )
 }
 
-// if (!value || !category) return;    na criação de tarefas se tiver valor nulo (campo vazio), vai dar problema então essa é uma validação de tarefa criada c dados nulos
+// if (!value || !category) return;    na criação de tarefas se tiver valor nulo (campo vazio), vai dar problema então essa é uma validação de tarefa criada com dados nulos
+
+            
+// const handleSubmit = (e) => {
+//     
+//     if (!value || !category) return;
+//     // ADICIONAR TODO
+//     addTodo(value, category);
+//     // LIMPAR OS CAMPOS DO FORMULÁRIO
+//     setValue("");   
+//     setCategory("");
+//     // console.log(value, category)
+// }

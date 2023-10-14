@@ -1,7 +1,7 @@
 import styles from './Todo.module.css';
 import { TodoType } from '../App' 
 
-export interface TodoProps {
+interface TodoProps {
     todo: TodoType;
     // removeTodo: RemoveType;
     // completeTodo: CompleteType;
