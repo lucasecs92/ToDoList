@@ -34,7 +34,7 @@ export interface TodoType {
    isCompleted: boolean;
 }
 
-// export interface RemoveType {
+// export interface RemoveType {  
 //   removeTodo: TodoType;
 // }
 // export interface CompleteType {
@@ -57,18 +57,19 @@ function App() {
   const [sort, setSort] = useState("Asc");
 
 // Add as tarefas
-  const addTodo = (text:TodoType, category:TodoType) => {
-  const newTodos = [...todos, 
-    {
-      id: Math.floor(Math.random() * 10000),
-      text,
-      category,
-      isCompleted: false,
-    },
-  ]
+  const addTodo = (text: TodoType, category: TodoType) => {
+    const newTodos = [...todos, 
+      {
+        id: Math.floor(Math.random() * 10000),
+        text,
+        category,
+        isCompleted: false,
+      },
+  ];
 
   setTodos(newTodos) // atualiza o estado dos meus Todos com os newTodos
   };
+  
 // REMOVE as tarefas
   // const removeTodo = (id:TodoType) => {
   //   const newTodos = [...todos];
@@ -83,7 +84,7 @@ function App() {
   };
   
 // COMPLETE as tarefas
-  const completeTodo = (id: string) => {
+    const completeTodo = (id: number) => {
     const newTodos = [...todos];
     newTodos.map((todo) => 
       todo.id === id ? todo.isCompleted = !todo.isCompleted : todo

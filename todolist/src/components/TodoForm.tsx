@@ -1,22 +1,35 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "./TodoForm.module.css";
+import { TodoType } from "../App";
 
-export function TodoForm({ addTodo }) {
-    
-    const [value, setValue] = useState('');
+interface AddProps {
+    (text: TodoType, category: TodoType): void;
+}
+
+export function TodoForm({ addTodo }: {addTodo: AddProps}) {
+
+    const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
-    
-    const handleSubmit = (e) => {
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (!value || !category) return;
-        // ADICIONAR TODO
-        addTodo(value, category);
-        // LIMPAR OS CAMPOS DO FORMULÁRIO
-        setValue("");
-        setCategory("");
-    
-        // console.log(value, category)
+        
+        if (!value || !category) return
+            addTodo(value, category); 
+            setValue(""); 
+            setCategory("");
     }
+    
+    // const handleSubmit = (e) => {
+    //     
+    //     if (!value || !category) return;
+    //     // ADICIONAR TODO
+    //     addTodo(value, category);
+    //     // LIMPAR OS CAMPOS DO FORMULÁRIO
+    //     setValue("");   
+    //     setCategory("");
+    //     // console.log(value, category)
+    // }
     
     return (
         <section className={styles.taskForm}>
