@@ -1,6 +1,11 @@
 import styles from './Search.module.css';
 
-export function Search({ search, setSearch }) {
+export interface SearchProps {
+    search: string;
+    setSearch: (search: string) => void;
+}
+
+export function Search({ search, setSearch }:SearchProps) {
     return (
         <section className={styles.search}>
             <h2>Pesquisar:</h2>

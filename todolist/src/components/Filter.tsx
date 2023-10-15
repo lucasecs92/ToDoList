@@ -1,3 +1,4 @@
+import { SortAscending, SortDescending } from '@phosphor-icons/react';
 import styles from './Filter.module.css';
 
 interface FilterProps {
@@ -21,8 +22,8 @@ export function Filter({ filter, setFilter, setSort }:FilterProps) {
                 </section>
                 <section className={styles.filterOrder}>
                     <p>Ordem alfabética:</p>
-                    <button onClick={() => setSort("Asc")}>Asc</button>
-                    <button onClick={() => setSort("Desc")}>Desc</button>
+                    <button onClick={() => setSort("Asc")}><SortAscending weight='bold'/></button>
+                    <button onClick={() => setSort("Desc")}><SortDescending weight='bold'/></button>
                 </section>
             </section>
         </section>

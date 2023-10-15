@@ -9,10 +9,31 @@
     align-items: center;
 }
 
+.todoBtn button {
+    color: var(--white);
+    padding: 5px 5px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: .8;
+    transition: .3s;
+}
+
 .complete {
     background-color: #5cb85c;
 }
 
 .remove {
     background-color: #d9534f;
+}
+
+.edit {
+    background-color: cornflowerblue;
+}
+
+.complete svg,
+.remove svg,
+.edit svg {
+    font-size: 1.5rem;  
 }

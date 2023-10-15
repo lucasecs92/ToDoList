@@ -12,14 +12,6 @@ body {
     background-size: cover;
 }
 
-.app {
-    max-width: 600px;
-    margin: 0 auto 300px;
-    background-color: #efefef;
-    padding: 20px 30px;
-    border-radius: 10px;
-}
-
 h1 {
     text-align: center;
 }
@@ -36,7 +28,7 @@ input {
     box-sizing: border-box;
 }
 
-button {
+/* button {
     background-color: #333974;
     color: var(--white);
     padding: 5px 10px;
@@ -46,16 +38,10 @@ button {
     cursor: pointer;
     opacity: .8;
     transition: .3s;
-}
+} */
 
 button:hover {
     opacity: 1;
-}
-
-.todo-list {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom:  1px solid #555;
 }
 
 input, 

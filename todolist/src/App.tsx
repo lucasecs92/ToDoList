@@ -4,6 +4,7 @@ import { CreateTask } from './components/CreateTask';
 import { Search } from './components/Search';
 import { Filter } from './components/Filter';
 
+import styles from './App.module.css'
 import './global.css'; 
 
 // const toDoList = [
@@ -38,7 +39,7 @@ export interface TodoType {
 const item = localStorage.getItem('TAREFAS');
 const dataLocalStorage = JSON.parse(item !== null ? item : '{}');
 
-function App() {
+export function App() {
 
   const [todos, setTodos] = useState(dataLocalStorage);
 
@@ -64,26 +65,30 @@ function App() {
   };
   
 // REMOVE as tarefas
-  // const removeTodo = (id:TodoType) => {
-  //   const newTodos = [...todos];
-  //   const filteredTodos = newTodos.filter((todo) => 
-  //     todo.id !== id ? todo : null
-  //   );
-  //   setTodos(filteredTodos);
-  // }
   const removeTodo = (id:TodoType['id']) => {
     const filteredTodos = todos.filter((todo:TodoType) => todo.id !== id);
+
     setTodos(filteredTodos);
   };
-  
+
+// EDITAR as tarefas
+  const editTodo = (id: number, newText: string) => {
+    const newTodos = todos.map((todo:TodoType) =>
+      todo.id === id ? {...todo, text: newText} : todo
+    );
+
+    setTodos(newTodos);
+  };
+
 // COMPLETE as tarefas
-    const completeTodo = (id: number) => {
+  const completeTodo = (id: number) => {
     const newTodos = [...todos];
     newTodos.map((todo) => 
       todo.id === id ? todo.isCompleted = !todo.isCompleted : todo
     );
+    
     setTodos(newTodos);
-  }
+  };
 
 // Salvando os dados no localStorage
   useEffect(() => {
@@ -91,11 +96,12 @@ function App() {
   }, [todos] );
 
   return (
-    <section className="app">
+    <section className={styles.app}>
       <h1>Lista de Tarefas</h1>     
       <Search search={search} setSearch={setSearch} />
       <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
-      <section className='todo-list'>
+
+      <section className={styles.todoList}>
         {todos
           .filter((todo:TodoType) => 
             filter === "All" 
@@ -118,6 +124,7 @@ function App() {
               todo={todo} 
               onRemoveTodo={removeTodo}
               onCompleteTodo={completeTodo}
+              onEditTodo={editTodo}
             />
           ))      
         }
