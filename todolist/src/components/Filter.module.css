@@ -36,3 +36,11 @@
 .filterOrder svg {
     font-size: 1.5rem;
 }
+
+/* Responsividade */
+@media (max-width: 660px) {
+
+    .filterStatus {
+        width: 30vw;
+    }
+}

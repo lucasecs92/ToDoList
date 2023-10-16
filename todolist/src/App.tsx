@@ -30,7 +30,7 @@ export function App() {
   const [sort, setSort] = useState("Asc");
 
 // Add as tarefas
-const addTodo = (text: string, category: string) => {
+  const addTodo = (text: string, category: string) => {
     const newTodos = [...todos, 
       {
         id: Math.floor(Math.random() * 10000),
@@ -76,39 +76,39 @@ const addTodo = (text: string, category: string) => {
 
   return (
     <section className={styles.app}>
-      <h1>Lista de Tarefas</h1>     
-      <Search search={search} setSearch={setSearch} />
-      <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
+        <h1>Lista de Tarefas</h1>     
+        <Search search={search} setSearch={setSearch} />
+        <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
 
-      <section className={styles.todoList}>
-        {todos
-          .filter((todo:TodoType) => 
-            filter === "All" 
-              ? true 
-              : filter === "Completed" 
-              ? todo.isCompleted 
-              : !todo.isCompleted
-          )
-          .filter((todo:TodoType) => 
-            todo.text.toLowerCase().includes(search.toLowerCase())
-          ) 
-          .sort((a:TodoType, b:TodoType) =>
-            sort === "Asc"
-              ? a.text.localeCompare(b.text)
-              : b.text.localeCompare(a.text)
-          ) 
-          .map((todo:TodoType) => ( 
-            <Todo
-              key={todo.id} 
-              todo={todo} 
-              onRemoveTodo={removeTodo}
-              onCompleteTodo={completeTodo}
-              onEditTodo={editTodo}
-              />
-              ))      
-            }
-      </section>
-      <CreateTask addTodo={addTodo} /> 
+        <section className={styles.todoList}>
+          {todos
+            .filter((todo:TodoType) => 
+              filter === "All" 
+                ? true 
+                : filter === "Completed" 
+                ? todo.isCompleted 
+                : !todo.isCompleted
+            )
+            .filter((todo:TodoType) => 
+              todo.text.toLowerCase().includes(search.toLowerCase())
+            ) 
+            .sort((a:TodoType, b:TodoType) =>
+              sort === "Asc"
+                ? a.text.localeCompare(b.text)
+                : b.text.localeCompare(a.text)
+            ) 
+            .map((todo:TodoType) => ( 
+              <Todo
+                key={todo.id} 
+                todo={todo} 
+                onRemoveTodo={removeTodo}
+                onCompleteTodo={completeTodo}
+                onEditTodo={editTodo}
+                />
+                ))      
+              }
+        </section>
+        <CreateTask addTodo={addTodo} /> 
     </section>
   )
 }
