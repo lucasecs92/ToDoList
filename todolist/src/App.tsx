@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Todo } from './components/Todo';
 import { CreateTask } from './components/CreateTask';
 import { Search } from './components/Search';
 import { Filter } from './components/Filter';
+import { TodoList } from './components/TodoList';
 
 import styles from './App.module.css'
 import './global.css'; 
@@ -18,14 +18,14 @@ export interface TodoType {
 const item = localStorage.getItem('TAREFAS');
 const dataLocalStorage = JSON.parse(item !== null ? item : '{}');
 
-export function App() {
+function App() {
 
   const [todos, setTodos] = useState(dataLocalStorage);
 
 // Funcionalidade de pesquisa
   const [search, setSearch] = useState("");
 
-// Funcionalidade do filtro
+// Funcionalidade de filtragem
   const [filter, setFilter] = useState("All");
   const [sort, setSort] = useState("Asc");
 
@@ -74,40 +74,20 @@ export function App() {
       localStorage.setItem('TAREFAS', JSON.stringify(todos));
   }, [todos] );
 
-  return (
+  return ( 
     <section className={styles.app}>
         <h1>Lista de Tarefas</h1>     
         <Search search={search} setSearch={setSearch} />
         <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
-
-        <section className={styles.todoList}>
-          {todos
-            .filter((todo:TodoType) => 
-              filter === "All" 
-                ? true 
-                : filter === "Completed" 
-                ? todo.isCompleted 
-                : !todo.isCompleted
-            )
-            .filter((todo:TodoType) => 
-              todo.text.toLowerCase().includes(search.toLowerCase())
-            ) 
-            .sort((a:TodoType, b:TodoType) =>
-              sort === "Asc"
-                ? a.text.localeCompare(b.text)
-                : b.text.localeCompare(a.text)
-            ) 
-            .map((todo:TodoType) => ( 
-              <Todo
-                key={todo.id} 
-                todo={todo} 
-                onRemoveTodo={removeTodo}
-                onCompleteTodo={completeTodo}
-                onEditTodo={editTodo}
-                />
-                ))      
-              }
-        </section>
+        <TodoList 
+          todos={todos} 
+          filter={filter} 
+          search={search} 
+          sort={sort} 
+          removeTodo={removeTodo} 
+          completeTodo={completeTodo} 
+          editTodo={editTodo}      
+        />
         <CreateTask addTodo={addTodo} /> 
     </section>
   )
