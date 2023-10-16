@@ -12,7 +12,7 @@ export function Filter({ filter, setFilter, setSort }:FilterProps) {
         <section className={styles.filter}>
             <h2>Filtrar:</h2>
             <section className={styles.filterOptions}>
-                <section>
+                <section className={styles.filterStatus}>
                     <p>Status:</p>
                     <select className={styles.filterSelect} value={filter} onChange={(e) => setFilter(e.target.value)}>
                         <option value="All">Todas</option>

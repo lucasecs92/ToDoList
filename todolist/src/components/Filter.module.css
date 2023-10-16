@@ -9,9 +9,12 @@
     justify-content: space-between;
 }
 
+.filterStatus {
+    width: 50%;
+}
+
 .filterSelect {
     background-color: var(--white);
-    width: 20vw;
 }
 
 .filterOrder {

@@ -7,27 +7,6 @@ import { Filter } from './components/Filter';
 import styles from './App.module.css'
 import './global.css'; 
 
-// const toDoList = [
-//   {
-//     id: 1,
-//     text: "Criar funcionalidade X no sistema",
-//     category: "Trabalho",
-//     isCompleted: false,
-//   },
-//   { 
-//     id: 2,
-//     text: "Ir para a academia",
-//     category: "Pessoal",
-//     isCompleted: false, 
-//   },
-//   {
-//     id: 3,
-//     text: "Estudar React",
-//     category: "Estudos",
-//     isCompleted: false,
-//   },
-// ];
-
 export interface TodoType {
    id: number;
    text: string;
@@ -51,7 +30,7 @@ export function App() {
   const [sort, setSort] = useState("Asc");
 
 // Add as tarefas
-  const addTodo = (text: string, category: string) => {
+const addTodo = (text: string, category: string) => {
     const newTodos = [...todos, 
       {
         id: Math.floor(Math.random() * 10000),
@@ -125,9 +104,9 @@ export function App() {
               onRemoveTodo={removeTodo}
               onCompleteTodo={completeTodo}
               onEditTodo={editTodo}
-            />
-          ))      
-        }
+              />
+              ))      
+            }
       </section>
       <CreateTask addTodo={addTodo} /> 
     </section>
@@ -136,6 +115,26 @@ export function App() {
 
 export default App;
 
+// const toDoList = [
+//   {
+//     id: 1,
+//     text: "Criar funcionalidade X no sistema",
+//     category: "Trabalho",
+//     isCompleted: false,
+//   },
+//   { 
+//     id: 2,
+//     text: "Ir para a academia",
+//     category: "Pessoal",
+//     isCompleted: false, 
+//   },
+//   {
+//     id: 3,
+//     text: "Estudar React",
+//     category: "Estudos",
+//     isCompleted: false,
+//   },
+// ];
 
 // [...todos] são todos os todo's
 

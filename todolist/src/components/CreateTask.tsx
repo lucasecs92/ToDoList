@@ -25,7 +25,7 @@ export function CreateTask({ addTodo }: {addTodo: AddProps}) {
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Digite o título" value={value} onChange={(e) => setValue(e.target.value)} />
                 <select className={styles.taskSelect} value={category} onChange={(e) => setCategory(e.target.value)}>
-                <option value="">Selecione uma categoria</option>
+                    <option value="">Selecione uma categoria</option>
                     <option value="Trabalho">Trabalho</option>
                     <option value="Pessoal">Pessoal</option>
                     <option value="Estudos">Estudos</option>
