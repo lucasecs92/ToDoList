@@ -5,4 +5,5 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   base: "/to_do_list",
   plugins: [react()],
+  server: { port: 1786 },
 });
